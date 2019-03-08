@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>pixel-icon.js - The simplest javascript icon editor</title>
+</head>
+<body>
+	<h1>PIXEL-ICON.JS</h1>
+	<h2>The simplest javascript icon editor</h2>
+	<h2>1. Create your icon:</h2>
+	<div id="my-icon"></div>
+	<div id="my-colors"></div>
+	<h2>2. Install the dependency:</h2>
+	<code>
+		npm i pixel-icon
+	</code>
+	<h2>3. Render the icon</h2>
+	<code>
+		import PixelIcon from "pixel-icon"
+
+		const container = document.getElementById("my-icon-container")
+		PixelIcon.render(container, "<span id="my-code">your code</span>")
+	</code>
+</body>
+<style>
+#my-editor {
+	text-align: center;
+}
+#my-colors a {
+	display: block;
+	width: 25px;
+	height: 25px;
+	margin: 8px;
+	cursor: pointer;
+}
+#my-colors a.selected {
+	box-shadow: 0 0 3px 3px rgba(0,0,0,0.3);
+}
+code {
+  display: block;
+  white-space: pre-wrap   
+}
+</style>
+</html>
