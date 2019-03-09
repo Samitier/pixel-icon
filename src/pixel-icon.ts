@@ -1,3 +1,5 @@
+import Encoder from "./encoder"
+
 class PixelIcon {
 
 	public readonly width = 8
@@ -7,12 +9,13 @@ class PixelIcon {
 
 	public readonly colors = [
 		"#000",
-		"#1E3888",
 		"#47A8BD",
 		"#9FD356",
 		"#9C3848",
 		"#FFF"
 	]
+
+	private encoder = new Encoder(this.colors.length)
 
 	public render(element: HTMLElement, code: string) {
 		const img = document.createElement("img")
@@ -27,7 +30,7 @@ class PixelIcon {
 		canvas.height = this.height * this.size
 		const context = canvas.getContext("2d")
 		if (context) {
-			this.renderCanvasContext(context, code.split(""))
+			this.renderCanvasContext(context, this.encoder.decode(code).split(""))
 		}
 		return canvas.toDataURL("image/png")
 	}

@@ -1,3 +1,4 @@
+import Encoder from "../src/encoder"
 import PixelIcon from "../src/pixel-icon"
 import { replaceStringAt } from "./utils"
 
@@ -7,7 +8,7 @@ export default class Icon {
 
 	private $icon = document.getElementById("my-icon")
 	private code = ""
-
+	private encoder = new Encoder(PixelIcon.colors.length)
 	private isPressed = false
 
 	constructor(
@@ -23,7 +24,7 @@ export default class Icon {
 		img.onmousedown = this.onClick.bind(this)
 		img.onmousemove = this.onMove.bind(this)
 		img.onmouseleave = this.onRelease.bind(this)
-		img.onmouseup = this.onRelease.bind(this)
+		document.addEventListener("mouseup", this.onRelease.bind(this))
 	}
 
 	private onClick(e: MouseEvent) {
@@ -39,6 +40,8 @@ export default class Icon {
 		if (!this.isPressed) return
 		const x = Math.floor(offsetX / PixelIcon.size)
 		const y = Math.floor(offsetY / PixelIcon.size)
-		this.onCodeChange(replaceStringAt(this.code, y * PixelIcon.height + x, this.color))
+		let code = this.encoder.decode(this.code)
+		code = replaceStringAt(code, y * PixelIcon.height + x, this.color)
+		this.onCodeChange(this.encoder.encode(code))
 	}
 }

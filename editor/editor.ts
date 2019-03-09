@@ -17,7 +17,7 @@ class Editor {
 	}
 
 	constructor() {
-		this.code = "1111111111114441111111101111111311113311111122111114111131114131"
+		this.code = "29edhf0-1xtttiwo-4c7q60o-577tur0"	
 	}
 }
 
