@@ -5,7 +5,7 @@ class PixelIcon {
 	public readonly width = 8
 	public readonly height = 8
 
-	public readonly size = 25
+	public readonly size = 20
 
 	public readonly colors = [
 		"#000",
@@ -17,30 +17,36 @@ class PixelIcon {
 
 	private encoder = new Encoder(this.colors.length)
 
-	public render(element: HTMLElement, code: string) {
+	public render(element: HTMLElement, code: string, options: Options = {}) {
 		const img = document.createElement("img")
-		img.src= this.generateImageSrc(code)
+		img.src= this.generateImageSrc(code, options)
 		element.innerHTML = ""
 		element.append(img)
 	}
 
-	private generateImageSrc(code: string) {
+	private generateImageSrc(code: string, options: Options) {
 		const canvas = document.createElement("canvas")
 		canvas.width = this.width * this.size
 		canvas.height = this.height * this.size
 		const context = canvas.getContext("2d")
 		if (context) {
-			this.renderCanvasContext(context, this.encoder.decode(code).split(""))
+			const squares = this.encoder.decode(code).split("")
+			this.renderCanvasContext(context, squares, options)
 		}
 		return canvas.toDataURL("image/png")
 	}
 
-	private renderCanvasContext(context: CanvasRenderingContext2D, squares: string[] = []) {
+	private renderCanvasContext(
+		context: CanvasRenderingContext2D,
+		squares: string[] = [],
+		options: Options
+	) {
 		for (let h = 0; h < this.height; ++h) {
 			for (let w = 0; w < this.width; ++w) {
 				const colorValue = squares[this.height * h + w]
 				context.fillStyle = this.getColor(colorValue)
-				context.fillRect(this.size * w, this.size * h, this.size - 1, this.size - 1)
+				const squareSize = this.size - (options.borderSize ? options.borderSize : 0)
+				context.fillRect(this.size * w, this.size * h, squareSize, squareSize)
 			}
 		}
 	}
@@ -52,6 +58,10 @@ class PixelIcon {
 		}
 		return this.colors[colorIdx]
 	}
+}
+
+interface Options {
+	borderSize?: number
 }
 
 export default new PixelIcon()

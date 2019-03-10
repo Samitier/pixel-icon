@@ -18,7 +18,7 @@ export default class Icon {
 	public render(code: string) {
 		if (!this.$icon) return
 		this.code = code
-		PixelIcon.render(this.$icon, this.code)
+		PixelIcon.render(this.$icon, this.code, { borderSize: 1 })
 		const img = (this.$icon.firstChild as HTMLElement)
 		img.draggable = false
 		img.onmousedown = this.onClick.bind(this)

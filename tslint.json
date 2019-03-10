@@ -2,6 +2,7 @@
 	"extends": ["tslint:recommended", "tslint-config-prettier"],
 	"rules": {
 		"curly": false,
-		"variable-name": false
+		"variable-name": false,
+		"interface-name": false
 	}
 }
