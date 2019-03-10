@@ -20,7 +20,7 @@ class Editor {
 	}
 
 	constructor() {
-		this.code = "hivr9g8-rzdtm4g-l31vu28-l31ver4-e0pdlzh-1"	
+		this.code = "hivr9g8-rzdtm4g-l31vu28-l31ver4"	
 	}
 }
 
