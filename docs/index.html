@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pixel-Icon.js - The simplest javascript icon editor</title>
+	<meta name="description" content="The simplest javascript icon editor.">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300+400" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<div id="title-icon"></div>
+			<div>
+				<h1>PIXEL-ICON.JS</h1>
+				<h2>The simplest javascript icon editor</h2>
+			</div>
+		</div>
+		<div class="step">
+			<h3>1. Create your icon</h3>
+			<div id="my-icon"></div>
+			<div id="my-colors"></div>
+		</div>
+		<div class="step">
+			<h3>2. Install with NPM</h3>
+			<code>
+				npm install pixel-icon
+			</code>
+		</div>
+		<div class="step">
+			<h3>3. Render it to your HTML</h3>
+			<code>
+				import PixelIcon from "pixel-icon"
+				<br><br>
+				const container = document.getElementById("my-icon-container")<br>
+				PixelIcon.render(container, "<span id="my-code">your code</span>")
+			</code>
+		</div>
+	</div>
+	<div class="credits">
+		<a href="https://github.com/Samitier/pixel-icon">View on Github</a>
+		<span>&bull;</span>
+		<a href="https://github.com/Samitier">Follow me @Samitier</a>
+	</div>
+<script type="text/javascript" src="bundle.js"></script></body>
+<style>
+#my-icon {
+	padding: .5em 0;
+	border: 1px solid #a8a289;
+	margin-bottom: .5em;
+}
+#my-icon img {
+	display: block;
+	margin: auto;
+}
+#my-colors {
+	border: 1px solid #a8a289;
+	display: flex;
+}
+#my-colors a {
+	display: block;
+	width: 25px;
+	height: 25px;
+	margin: 8px;
+	cursor: pointer;
+}
+#my-colors a.selected {
+	box-shadow: 0 0 0px 3px rgba(0,0,0,0.2);
+}
+.container {
+	display: flex;
+	max-width: 1200px;
+	margin: auto;
+}
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	background: #ccc8af;
+	color: #4f493b;
+	padding: 1em;
+}
+code {
+  display: block;
+  background: #f5efda;
+  color: #595248;
+  font-size: 15px;
+  padding: 1em;
+}
+.title {
+	position: absolute;
+	display: flex;
+	align-items: center;
+}
+#title-icon {
+	width: 60px;
+	margin-right: 1em;
+	border: 5px solid;
+}
+#title-icon img {
+	width: 100%;
+	display: block;
+}
+.step {
+	background: #e2dbbf;
+	border: 2px outset #a8a289;
+	box-shadow: 2px 2px 0 1px #a69f83;
+	padding: 0.5em;
+	margin: 9em 2em 0 0;
+}
+h3 {
+	background: #6f695b;
+	color: #d6d2b9;
+	margin: -.5em -.5em .5em -.5em;
+	padding: .2em .5em;
+	letter-spacing: 1px;
+}
+h1 {
+	font-weight: bold;
+	font-size: 60px;
+	margin: 0;
+}
+h2 { 
+	margin-top: -8px;
+	font-size: 25px;
+}
+a {
+	color: #4f493b;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:hover { text-decoration: underline }
+.credits {
+	margin-top: 3.5em;
+	font-size: 18px;
+	text-align: center;
+}
+.credits span {
+	display: inline-block;
+	padding: 0 .5em;
+}
+</style>
+</html>
