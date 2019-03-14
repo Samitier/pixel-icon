@@ -17,6 +17,9 @@ module.exports = {
 	},
 	output: {
 		filename: 'pixel-icon.js',
-		path: path.resolve(__dirname, '../lib')
+		path: path.resolve(__dirname, '../lib'),
+		library: 'PixelIcon',
+		libraryExport: 'default',
+		libraryTarget: 'umd'
 	}
 }

@@ -1,4 +1,4 @@
-import PixelIcon from "../src/pixel-icon"
+import { defaultOptions } from "../src/options"
 
 export default class ColorPicker {
 
@@ -14,7 +14,7 @@ export default class ColorPicker {
 
 	private render() {
 		this.$container.innerHTML = ""
-		PixelIcon.colors
+		defaultOptions.colors
 			.map((c, i) => this.renderColorElem(c, i))
 			.forEach(c => this.$container.appendChild(c))
 	}

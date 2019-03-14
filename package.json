@@ -1,13 +1,13 @@
 {
   "name": "pixel-icon",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "The simplest pixel icon generator",
   "main": "lib/pixel-icon.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./src/webpack.config.js",
 	"dev": "webpack-dev-server  --config ./editor/webpack.config.js",
-	"build:editor": "webpack --config ./editor/webpack.config.js"
+	"build:docs": "webpack --config ./editor/webpack.config.js"
   },
   "author": "Blai Samitier <blai.samitier@gmail.com>",
   "homepage":"https://samitier.github.io/pixel-icon/",

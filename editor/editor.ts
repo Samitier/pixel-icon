@@ -16,7 +16,7 @@ class Editor {
 		this._code = c
 		this.icon.render(c)
 		if(this.$myCode) this.$myCode.innerHTML = c
-		if (this.$titleIcon) PixelIcon.render(this.$titleIcon, this.code)
+		if (this.$titleIcon) PixelIcon(this.$titleIcon, this.code)
 	}
 
 	constructor() {

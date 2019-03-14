@@ -1,67 +1,46 @@
 import Encoder from "./encoder"
+import { defaultOptions, Options } from "./options"
 
-class PixelIcon {
+export default function render(element: HTMLElement, code: string, options: Options = {}) {
+	if (!element || !code) return
+	const img = document.createElement("img")
+	img.src= generateImageSrc(code, {...defaultOptions, ...options })
+	element.innerHTML = ""
+	element.append(img)
+}
 
-	public readonly width = 8
-	public readonly height = 8
-
-	public readonly size = 20
-
-	public readonly colors = [
-		"#000",
-		"#47A8BD",
-		"#9FD356",
-		"#9C3848",
-		"#FFF"
-	]
-
-	private encoder = new Encoder(this.colors.length)
-
-	public render(element: HTMLElement, code: string, options: Options = {}) {
-		const img = document.createElement("img")
-		img.src= this.generateImageSrc(code, options)
-		element.innerHTML = ""
-		element.append(img)
+function generateImageSrc(code: string, options: Options) {
+	const canvas = document.createElement("canvas")
+	canvas.width = options.width * options.size
+	canvas.height = options.height * options.size
+	const context = canvas.getContext("2d")
+	if (context) {
+		const encoder = new Encoder(options.colors.length)
+		const squares = encoder.decode(code).split("")
+		renderCanvasContext(context, squares, options)
 	}
+	return canvas.toDataURL("image/png")
+}
 
-	private generateImageSrc(code: string, options: Options) {
-		const canvas = document.createElement("canvas")
-		canvas.width = this.width * this.size
-		canvas.height = this.height * this.size
-		const context = canvas.getContext("2d")
-		if (context) {
-			const squares = this.encoder.decode(code).split("")
-			this.renderCanvasContext(context, squares, options)
+function renderCanvasContext(
+	context: CanvasRenderingContext2D,
+	squares: string[] = [],
+	options: Options
+) {
+	for (let h = 0; h < options.height; ++h) {
+		for (let w = 0; w < options.width; ++w) {
+			const colorValue = squares[options.height * h + w]
+			context.fillStyle = getColor(colorValue, options.colors)
+			const squareSize = options.size - options.borderSize
+			context.fillRect(options.size * w, options.size * h, squareSize, squareSize)
 		}
-		return canvas.toDataURL("image/png")
-	}
-
-	private renderCanvasContext(
-		context: CanvasRenderingContext2D,
-		squares: string[] = [],
-		options: Options
-	) {
-		for (let h = 0; h < this.height; ++h) {
-			for (let w = 0; w < this.width; ++w) {
-				const colorValue = squares[this.height * h + w]
-				context.fillStyle = this.getColor(colorValue)
-				const squareSize = this.size - (options.borderSize ? options.borderSize : 0)
-				context.fillRect(this.size * w, this.size * h, squareSize, squareSize)
-			}
-		}
-	}
-
-	private getColor(colorValue: string) {
-		const colorIdx = parseInt(colorValue, 10)
-		if (colorIdx < 0 || colorIdx >= this.colors.length) {
-			return ""
-		}
-		return this.colors[colorIdx]
 	}
 }
 
-interface Options {
-	borderSize?: number
+function getColor(colorValue: string, colors: string[]) {
+	const colorIdx = parseInt(colorValue, 10)
+	if (colorIdx < 0 || colorIdx >= colors.length) {
+		return ""
+	}
+	return colors[colorIdx]
 }
-
-export default new PixelIcon()
