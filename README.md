@@ -13,7 +13,7 @@ You can pass an options object when rendering an icon. Here's a full feature exa
 ```js
 import PixelIcon from "pixel-icon"
 
-PixelIcon(yourContainer, {
+PixelIcon(yourContainer, yourIconCode, {
 	// border between each pixel to create a grid-like image 
 	borderSize: 0, 
 	// color palette of your image.
@@ -32,5 +32,5 @@ PixelIcon(yourContainer, {
 	width: 8,
 })
 ```
-Properties like `height`, `width` and `colors` will directly affect the size of the codified image, as
+The properties `height`, `width` and `colors` will directly affect the size of the codified image as
 it will need more characters to be rendered.
