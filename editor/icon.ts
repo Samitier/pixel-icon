@@ -20,11 +20,10 @@ export default class Icon {
 		if (!this.$icon) return
 		this.code = code
 		PixelIcon(this.$icon, this.code, { borderSize: 1 })
-		const img = (this.$icon.firstChild as HTMLElement)
-		img.draggable = false
-		img.onmousedown = this.onClick.bind(this)
-		img.onmousemove = this.onMove.bind(this)
-		img.onmouseleave = this.onRelease.bind(this)
+		this.$icon.draggable = false
+		this.$icon.onmousedown = this.onClick.bind(this)
+		this.$icon.onmousemove = this.onMove.bind(this)
+		this.$icon.onmouseleave = this.onRelease.bind(this)
 		document.addEventListener("mouseup", this.onRelease.bind(this))
 	}
 

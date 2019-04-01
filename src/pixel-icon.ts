@@ -1,12 +1,18 @@
 import Encoder from "./encoder"
 import { defaultOptions, Options } from "./options"
 
-export default function render(element: HTMLElement, code: string, options: Options = {}) {
+export default function render(element: any, code: string, options: Options = {}) {
 	if (!element || !code) return
-	const img = document.createElement("img")
-	img.src= generateImageSrc(code, {...defaultOptions, ...options })
-	element.innerHTML = ""
-	element.append(img)
+	const src = generateImageSrc(code, {...defaultOptions, ...options })
+	if (element.nodeName === "IMG") {
+		element.src = src
+	}
+	else {
+		const img = document.createElement("img")
+		img.src = src 
+		element.innerHTML = ""
+		element.append(img)
+	}
 }
 
 function generateImageSrc(code: string, options: Options) {
