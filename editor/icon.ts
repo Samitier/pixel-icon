@@ -1,5 +1,5 @@
 import Encoder from "../src/encoder"
-import { defaultOptions } from "../src/options"
+import { defaultOptions, Options } from "../src/options"
 import PixelIcon from "../src/pixel-icon"
 import { replaceStringAt } from "./utils"
 
@@ -11,15 +11,17 @@ export default class Icon {
 	private code = ""
 	private encoder = new Encoder(defaultOptions.colors.length)
 	private isPressed = false
+	private size = defaultOptions.size
 
 	constructor(
 		private onCodeChange: (c: string) => void
 	) {}
 
-	public render(code: string) {
+	public render(code: string, options: Options) {
 		if (!this.$icon) return
 		this.code = code
-		PixelIcon(this.$icon, this.code, { borderSize: 1 })
+		this.size = options.size || defaultOptions.size
+		PixelIcon(this.$icon, this.code, { ...options, hasBorder: true })
 		this.$icon.draggable = false
 		this.$icon.onmousedown = this.onClick.bind(this)
 		this.$icon.onmousemove = this.onMove.bind(this)
@@ -38,10 +40,10 @@ export default class Icon {
 
 	private onMove({ offsetX, offsetY }: MouseEvent) {
 		if (!this.isPressed) return
-		const x = Math.floor(offsetX / defaultOptions.size)
-		const y = Math.floor(offsetY / defaultOptions.size)
+		const x = Math.floor(offsetX / 20)
+		const y = Math.floor(offsetY / 20)
 		let code = this.encoder.decode(this.code)
-		code = replaceStringAt(code, y * defaultOptions.height + x, this.color)
+		code = replaceStringAt(code, y * this.size + x, this.color)
 		this.onCodeChange(this.encoder.encode(code))
 	}
 }

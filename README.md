@@ -14,8 +14,6 @@ You can pass an options object when rendering an icon. Here's a full feature exa
 import PixelIcon from "pixel-icon"
 
 PixelIcon(yourContainer, yourIconCode, {
-	// border between each pixel to create a grid-like image 
-	borderSize: 0, 
 	// color palette of your image.
 	colors: [
 		"#000",
@@ -24,13 +22,11 @@ PixelIcon(yourContainer, yourIconCode, {
 		"#9C3848",
 		"#FFF"
 	],
-	// number of horizontal pixels
-	height: 8,
-	// size of each pixel
-	size: 20,
-	// number of vertical pixels
-	width: 8,
+	// if true, renders a border between each pixel to create a grid-like image 
+	hasBorder: false, 
+	// number of vertical and horizontal pixels
+	size: 20
 })
 ```
-The properties `height`, `width` and `colors` will directly affect the size of the codified image as
+The properties `size` and `colors` will directly affect the size of the codified image as
 it will need more characters to be rendered.

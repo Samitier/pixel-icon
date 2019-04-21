@@ -1,6 +1,8 @@
 import Encoder from "./encoder"
 import { defaultOptions, Options } from "./options"
 
+const squareSize = 20
+
 export default function render(element: any, code: string, options: Options = {}) {
 	if (!element || !code) return
 	const src = generateImageSrc(code, {...defaultOptions, ...options })
@@ -17,8 +19,7 @@ export default function render(element: any, code: string, options: Options = {}
 
 function generateImageSrc(code: string, options: Options) {
 	const canvas = document.createElement("canvas")
-	canvas.width = options.width * options.size
-	canvas.height = options.height * options.size
+	canvas.width = canvas.height = options.size * squareSize
 	const context = canvas.getContext("2d")
 	if (context) {
 		const encoder = new Encoder(options.colors.length)
@@ -33,12 +34,15 @@ function renderCanvasContext(
 	squares: string[] = [],
 	options: Options
 ) {
-	for (let h = 0; h < options.height; ++h) {
-		for (let w = 0; w < options.width; ++w) {
-			const colorValue = squares[options.height * h + w]
+	for (let h = 0; h < options.size; ++h) {
+		for (let w = 0; w < options.size; ++w) {
+			const colorValue = squares[options.size * h + w]
 			context.fillStyle = getColor(colorValue, options.colors)
-			const squareSize = options.size - options.borderSize
-			context.fillRect(options.size * w, options.size * h, squareSize, squareSize)
+			if (options.hasBorder) {
+				context.strokeStyle = "#FFF"
+				context.strokeRect(squareSize * w, squareSize * h, squareSize, squareSize)
+			}
+			context.fillRect(squareSize * w, squareSize * h, squareSize, squareSize)
 		}
 	}
 }

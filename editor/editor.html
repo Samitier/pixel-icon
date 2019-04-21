@@ -7,10 +7,30 @@
 	<meta name="description" content="The simplest javascript icon editor.">
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300|VT323" rel="stylesheet">
 	<style>
-		.icon-container {
+		.border-container {
 			border: 1px solid #a8a289;
 			padding: .5em 0;
 			margin-bottom: .5em;
+			text-align: center;
+		}
+		input[type=number]::-webkit-inner-spin-button, 
+		input[type=number]::-webkit-outer-spin-button { 
+			-webkit-appearance: none;
+		}
+		input {
+			background: #f5efda;
+			text-align: left;
+			font-size: 12px;
+			outline: none;
+			border: none;
+			padding: .5em;
+			width: 60px;
+			margin: .3em;
+		}
+		input[type=number] {
+			width: 20px;
+			text-align: center;
+			margin: 0 .3em;
 		}
 		#my-icon {
 			display: block;
@@ -21,7 +41,7 @@
 			display: flex;
 			justify-content: center;
 		}
-		#my-colors a {
+		#my-colors a, #custom-colors a {
 			display: block;
 			width: 25px;
 			height: 25px;
@@ -30,6 +50,21 @@
 		}
 		#my-colors a.selected {
 			box-shadow: 0 0 0px 3px rgba(0,0,0,0.2);
+		}
+		.color-transparent {
+			border: 1px dashed #a8a289;
+		}
+		#custom-colors {
+			text-align: left;
+		}
+		#custom-colors > div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#custom-colors a {
+			display: inline-block;
+			margin: 0 .2em;
 		}
 		.container {
 			display: flex;
@@ -48,6 +83,15 @@
 			color: #595248;
 			font-size: 14px;
 			padding: 1em;
+			margin: .7em 0;
+		}
+		code span {
+			display: block;
+			padding-left: 1em;
+			max-width: 400px;
+		}
+		code .comment {
+			opacity: 0.5;
 		}
 		.title {
 			position: absolute;
@@ -56,8 +100,7 @@
 		}
 		#title-icon {
 			width: 48px;
-			margin:  -7px .8em 0 0;
-			border: 4px solid;
+			margin:  -7px .7em 0 0;
 		}
 		.step {
 			background: #e2dbbf;
@@ -126,25 +169,42 @@
 			</div>
 		</div>
 		<div class="step">
-			<h3>1. Create your icon</h3>
-			<div class="icon-container">
+			<h3>1. Set size and colors</h3>
+			<div class="border-container">
+				<b>Size:</b>
+				<input type="number" id="size" min="3" max="15">
+			</div>
+			<div class="border-container">
+				<b>Colors:</b>
+				<div id="custom-colors"></div>
+			</div>
+		</div>
+		<div class="step">
+			<h3>2. Draw your icon</h3>
+			<div class="border-container">
 				<img id="my-icon">
 			</div>
 			<div id="my-colors"></div>
 		</div>
 		<div class="step">
-			<h3>2. Install with NPM</h3>
+			<h3>3. Install & render</h3>
 			<code>
+				<div class="comment">
+					// Install dependency with NPM
+				</div>
 				npm install pixel-icon
 			</code>
-		</div>
-		<div class="step">
-			<h3>3. Render it to your HTML</h3>
 			<code>
 				import PixelIcon from "pixel-icon"
 				<br><br>
-				const container = document.getElementById("my-icon-container")<br>
-				PixelIcon(container, "<span id="my-code">your code</span>")
+				<div class="comment">
+					// Render the icon to an HTML element
+				</div>
+				PixelIcon(
+					<span>document.getElementById("my-icon-container"),</span>
+					<span id="my-code">your code</span>
+					<span id="my-options" style="display: none"></span>
+				)
 			</code>
 		</div>
 	</div>

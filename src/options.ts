@@ -1,21 +1,17 @@
 export const defaultOptions = {
-	borderSize: 0,
 	colors: [
 		"#000",
-		"#47A8BD",
+		"#FFF",
 		"#9FD356",
 		"#9C3848",
-		"#FFF"
+		"#00000000"
 	],
-	height: 8,
-	size: 20,
-	width: 8,
+	hasBorder: false,
+	size: 8
 }
 
 export interface Options {
-	borderSize?: number
 	colors?: string[]
-	height?: number
+	hasBorder?: boolean
 	size?: number
-	width?: number
 }

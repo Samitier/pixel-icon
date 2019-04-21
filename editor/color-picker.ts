@@ -1,4 +1,4 @@
-import { defaultOptions } from "../src/options"
+import { defaultOptions, Options } from "../src/options"
 
 export default class ColorPicker {
 
@@ -7,14 +7,15 @@ export default class ColorPicker {
 	private selectedElem = 0
 
 	constructor(
-		private onSelectColor: (c: string) => void
+		private onSelectColor: (c: string) => void,
+		public colors: string[]
 	) {
 		this.render()
 	}
 
-	private render() {
+	public render() {
 		this.$container.innerHTML = ""
-		defaultOptions.colors
+		this.colors
 			.map((c, i) => this.renderColorElem(c, i))
 			.forEach(c => this.$container.appendChild(c))
 	}
@@ -23,6 +24,7 @@ export default class ColorPicker {
 		const anchor = document.createElement("a")
 		anchor.style.background = color
 		anchor.dataset.color = index.toString()
+		if (color === "#00000000") anchor.classList.add("color-transparent")
 		if (this.selectedElem === index) anchor.classList.add("selected")
 		anchor.onclick = this.onClickColor.bind(this)
 		return anchor
